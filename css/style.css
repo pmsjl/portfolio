@@ -701,10 +701,10 @@ button {
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.05);
 }
 
-/* 校徽：圆形截取展示（图片透明角直接透出背景） */
+/* 校徽：完整展示（图幅四周补同色白边，圆形容器裁剪，不再裁到徽记） */
 .edu-logo-wrap {
-    width: 140px;
-    height: 140px;
+    width: 172px;
+    height: 172px;
     border-radius: 50%;
     background: transparent;
     border: 1px solid var(--color-border);
@@ -716,8 +716,8 @@ button {
 }
 
 .edu-logo {
-    width: 132px;
-    height: 132px;
+    width: 164px;
+    height: 164px;
     object-fit: contain;
 }
 
