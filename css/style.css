@@ -701,14 +701,13 @@ button {
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.05);
 }
 
-/* 校徽：完整展示（图幅四周补同色白边，圆形容器裁剪，不再裁到徽记） */
+/* 校徽：图片本身即为圆形（四角透明），容器不做任何裁剪，
+   不存在矩形容器截断的可能 */
 .edu-logo-wrap {
-    width: 172px;
-    height: 172px;
+    width: 184px;
+    height: 184px;
     border-radius: 50%;
     background: transparent;
-    border: 1px solid var(--color-border);
-    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -716,8 +715,9 @@ button {
 }
 
 .edu-logo {
-    width: 164px;
-    height: 164px;
+    width: 184px;
+    height: 184px;
+    border-radius: 50%;
     object-fit: contain;
 }
 
