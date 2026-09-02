@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="徐俊杰 · 求职 AI 应用开发实习 · 哈尔滨工业大学（深圳）｜Java/Spring Boot 后端与 FastAPI AI Agent + RAG 应用开发">
+    <meta property="og:title" content="徐俊杰 · 求职 AI 应用开发实习">
+    <meta property="og:description" content="哈尔滨工业大学（深圳）计算机与电子通信本科在读，主攻后端与 AI 应用工程">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pmsjl.github.io/portfolio/">
+
+    <title>徐俊杰 · 求职 AI 应用开发实习</title>
+
+    <!-- 主题初始化：读取 localStorage / 系统偏好，首帧防闪 -->
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) { /* localStorage 不可用时保持默认浅色 */ }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Favicon：终端提示符 -->
+    <link rel="icon"
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="%232563EB"/><path d="M4 7h2v7h5v2H4zM14 7h6v2h-4v2h3v2h-3v3h-2z" fill="white"/></svg>'>
+
+    <link rel="stylesheet" href="css/style.css">
+    <noscript>
+        <style>.reveal { opacity: 1; transform: none; } .about-code-window .code-line { opacity: 1; transform: none; }</style>
+    </noscript>
+</head>
+
+<body>
+    <!-- ==============================================
+         导航栏：终端 logo + 锚点链接 + 主题切换（移动端汉堡菜单）
+         ============================================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo" aria-label="回到顶部">
+                <span class="logo-prompt">~/</span>pmsjl<span class="logo-cursor">_</span>
+            </a>
+
+            <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false">
+                <span class="toggle-bar"></span>
+                <span class="toggle-bar"></span>
+                <span class="toggle-bar"></span>
+            </button>
+
+            <div class="nav-links" id="navLinks">
+                <a href="#about">关于我</a>
+                <a href="#education">教育</a>
+                <a href="#skills">技能</a>
+                <a href="#projects">项目</a>
+                <a href="#honors">荣誉</a>
+                <a href="#contact">联系</a>
+                <!-- 日夜切换：Sarvesh 原版胶囊开关（蓝轨道 + 太阳/月亮旋钮） -->
+                <button id="themeToggle" class="theme-switch" aria-label="切换深浅色模式" aria-pressed="false">
+                    <div class="switch-handle"></div>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==============================================
+         Hero：头像 + 姓名 + 岗位 + 按钮 + 社交 + 指标
+         ============================================== -->
+    <section id="hero" class="hero">
+        <div class="container hero-content">
+            <div class="profile-image-wrapper">
+                <div class="profile-image">
+                    <!-- 头像：优先加载 assets/avatar.webp（用户照片），缺失时回退占位图 -->
+                    <img src="assets/avatar.webp" onerror="this.onerror=null;this.src='assets/avatar.svg';"
+                        alt="徐俊杰照片" fetchpriority="high" width="300" height="300">
+                </div>
+            </div>
+
+            <div class="hero-text">
+                <p class="hero-greeting">你好，我是</p>
+                <h1 class="hero-name">徐俊杰</h1>
+                <p class="hero-title">哈尔滨工业大学（深圳）· 本科在读</p>
+
+                <!-- 终端命令行：求职状态（与 ~/pmsjl_ logo、代码窗同品牌） -->
+                <p class="term-line">
+                    <span class="term-prompt">❯</span>
+                    <span class="term-text">求职中 · 目标岗位：AI 应用开发实习</span>
+                    <span class="term-cursor">▊</span>
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-filled">查看项目</a>
+                    <a href="assets/resume.pdf" class="btn btn-outline" download="徐俊杰_AI应用开发_实习简历.pdf">下载简历</a>
+                </div>
+
+                <div class="hero-metrics">
+                    <div class="metric">
+                        <span class="metric-value">3</span>
+                        <span class="metric-label">独立项目</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">85.9</span>
+                        <span class="metric-label">平均学分绩</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">2</span>
+                        <span class="metric-label">在线产品</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#about" class="scroll-indicator" aria-label="向下滚动">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </a>
+    </section>
+
+    <!-- ==============================================
+         关于我：profile.json 代码窗 + 大卡自述（Aryan 式标题下划线）
+         ============================================== -->
+    <section id="about" class="section about-section reveal">
+        <div class="container">
+            <h2 class="section-title">关于我</h2>
+
+            <div class="about-content">
+                <!-- 代码窗装饰（Sarvesh 元素，内容为徐俊杰数据） -->
+                <div class="about-code-window">
+                    <div class="code-window-header">
+                        <span class="card-dot red"></span>
+                        <span class="card-dot yellow"></span>
+                        <span class="card-dot green"></span>
+                        <span class="code-filename">profile.json</span>
+                    </div>
+                    <div class="code-window-body">
+                        <div class="code-line"><span class="code-key">"name"</span><span class="code-colon">:</span> <span class="code-string">"徐俊杰"</span><span class="code-comma">,</span></div>
+                        <div class="code-line"><span class="code-key">"role"</span><span class="code-colon">:</span> <span class="code-string">"求职 AI 应用开发实习"</span><span class="code-comma">,</span></div>
+                        <div class="code-line"><span class="code-key">"gpa"</span><span class="code-colon">:</span> <span class="code-number">85.934</span><span class="code-comma">,</span></div>
+                        <div class="code-line"><span class="code-key">"projects"</span><span class="code-colon">:</span> <span class="code-number">3</span><span class="code-comma">,</span></div>
+                        <div class="code-line"><span class="code-key">"skills"</span><span class="code-colon">:</span> <span class="code-bracket">[</span></div>
+                        <div class="code-line code-indent"><span class="code-string">"Java"</span><span class="code-comma">,</span></div>
+                        <div class="code-line code-indent"><span class="code-string">"Spring Boot"</span><span class="code-comma">,</span></div>
+                        <div class="code-line code-indent"><span class="code-string">"FastAPI"</span><span class="code-comma">,</span></div>
+                        <div class="code-line code-indent"><span class="code-string">"RAG"</span></div>
+                        <div class="code-line"><span class="code-bracket">]</span><span class="code-comma">,</span></div>
+                        <div class="code-line"><span class="code-key">"status"</span><span class="code-colon">:</span> <span class="code-string code-green">"open to opportunities"</span><span class="cursor-blink">▋</span></div>
+                    </div>
+                </div>
+
+                <!-- 自述大卡（Aryan 式：大内边距 + 白色加粗量化指标） -->
+                <div class="about-text-card">
+                    <p class="about-text">
+                        主攻 <strong>Java / Spring Boot</strong> 业务后端与 <strong>Python / FastAPI</strong> AI
+                        应用工程，从业务模型设计、RESTful 接口到 RAG 检索增强与 AI Agent 工具调用均有完整实践，
+                        能独立完成从需求分析、系统设计到部署上线的全流程交付。
+                    </p>
+                    <p class="about-text">
+                        独立完成智能校园二手交易平台（AI Agent + RAG）等项目的核心功能：自建 <strong>200
+                            条人工复核评测集</strong>，将 LLM 路由准确率提升至 <strong>97.50%</strong>。三个项目均已
+                        开源可查，其中校园二手平台与 Verbal Memory 平台可在线体验，覆盖后端业务、AI
+                        Agent、检索增强到部署上线的完整链路。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+         教育：校徽 + 芯片 + 关键信息（Sarvesh 式教育卡）
+         ============================================== -->
+    <section id="education" class="section education-section reveal">
+        <div class="container">
+            <h2 class="section-title">教育</h2>
+
+            <div class="edu-card">
+                <div class="edu-logo-wrap">
+                    <!-- 校徽：优先加载 assets/hit-logo.webp（用户提供），缺失时回退占位徽章 -->
+                    <img src="assets/hit-logo.webp" onerror="this.onerror=null;this.src='assets/hit-badge.svg';"
+                        alt="哈尔滨工业大学（深圳）校徽" class="edu-logo" width="96" height="96">
+                </div>
+                <div class="edu-info">
+                    <h3 class="edu-name">哈尔滨工业大学（深圳）</h3>
+                    <p class="edu-major">计算机与电子通信 · 本科</p>
+                    <p class="edu-stats">平均学分绩 85.934 · 综合测评前 25% · 中共预备党员</p>
+                    <p class="edu-date">2024.08 — 2028.08 · 深圳</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+         技能：| 分组标题 + 图标芯片（Sarvesh 分类式，不做巨型图标墙）
+         ============================================== -->
+    <section id="skills" class="section skills-section reveal">
+        <div class="container">
+            <h2 class="section-title">技能</h2>
+
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3 class="category-title">后端</h3>
+                    <div class="skills-grid">
+                        <span class="skill-chip"><img src="assets/icons/java.svg" alt="" class="chip-ico chip-java">Java</span>
+                        <span class="skill-chip"><img src="assets/icons/spring.svg" alt="" class="chip-ico chip-spring">Spring Boot</span>
+                        <span class="skill-chip"><img src="assets/icons/code.svg" alt="" class="chip-ico chip-plain">Spring MVC</span>
+                        <span class="skill-chip"><img src="assets/icons/code.svg" alt="" class="chip-ico chip-plain">MyBatis-Plus</span>
+                        <span class="skill-chip"><img src="assets/icons/mysql.svg" alt="" class="chip-ico chip-mysql">MySQL</span>
+                        <span class="skill-chip"><img src="assets/icons/redis.svg" alt="" class="chip-ico chip-redis">Redis</span>
+                        <span class="skill-chip"><img src="assets/icons/apachemaven.svg" alt="" class="chip-ico chip-maven">Maven</span>
+                        <span class="skill-chip"><img src="assets/icons/code.svg" alt="" class="chip-ico chip-plain">RESTful API</span>
+                        <span class="skill-chip"><img src="assets/icons/code.svg" alt="" class="chip-ico chip-plain">Knife4j</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="category-title">AI 应用</h3>
+                    <div class="skills-grid">
+                        <span class="skill-chip"><img src="assets/icons/python.svg" alt="" class="chip-ico chip-python">Python</span>
+                        <span class="skill-chip"><img src="assets/icons/fastapi.svg" alt="" class="chip-ico chip-fastapi">FastAPI</span>
+                        <span class="skill-chip"><img src="assets/icons/code.svg" alt="" class="chip-ico chip-plain">OpenAI Responses API</span>
+                        <span class="skill-chip"><img src="assets/icons/code.svg" alt="" class="chip-ico chip-plain">Structured Outputs</span>
+                        <span class="skill-chip"><img src="assets/icons/code.svg" alt="" class="chip-ico chip-plain">Tool Calling</span>
+                        <span class="skill-chip"><img src="assets/icons/code.svg" alt="" class="chip-ico chip-plain">RAG</span>
+                        <span class="skill-chip"><img src="assets/icons/code.svg" alt="" class="chip-ico chip-plain">Embedding</span>
+                        <span class="skill-chip"><img src="assets/icons/code.svg" alt="" class="chip-ico chip-plain">FAISS</span>
+                        <span class="skill-chip"><img src="assets/icons/code.svg" alt="" class="chip-ico chip-plain">Prompt Engineering</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="category-title">工程工具</h3>
+                    <div class="skills-grid">
+                        <span class="skill-chip"><img src="assets/icons/git.svg" alt="" class="chip-ico chip-git">Git</span>
+                        <span class="skill-chip"><img src="assets/icons/linux.svg" alt="" class="chip-ico chip-linux">Linux</span>
+                        <span class="skill-chip"><img src="assets/icons/code.svg" alt="" class="chip-ico chip-plain">JUnit</span>
+                        <span class="skill-chip"><img src="assets/icons/code.svg" alt="" class="chip-ico chip-plain">Lombok</span>
+                        <span class="skill-chip"><img src="assets/icons/code.svg" alt="" class="chip-ico chip-plain">Apifox</span>
+                        <span class="skill-chip"><img src="assets/icons/markdown.svg" alt="" class="chip-ico chip-markdown">Markdown</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="category-title">前端协作</h3>
+                    <div class="skills-grid">
+                        <span class="skill-chip"><img src="assets/icons/html5.svg" alt="" class="chip-ico chip-html">HTML</span>
+                        <span class="skill-chip"><img src="assets/icons/css3.svg" alt="" class="chip-ico chip-css">CSS</span>
+                        <span class="skill-chip"><img src="assets/icons/javascript.svg" alt="" class="chip-ico chip-js">JavaScript</span>
+                        <span class="skill-chip"><img src="assets/icons/vue-dot-js.svg" alt="" class="chip-ico chip-vue">Vue（基础）</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+         项目：渐变头编号卡 + 截图槽位 + GitHub 栏（Aryan 式）
+         ============================================== -->
+    <section id="projects" class="section projects-section reveal">
+        <div class="container">
+            <div class="projects-header">
+                <div>
+                    <h2 class="section-title">项目</h2>
+                </div>
+                <a href="https://github.com/pmsjl" target="_blank" rel="noopener noreferrer"
+                    class="github-bar">更多项目在 GitHub ↗</a>
+            </div>
+
+            <div class="projects-grid">
+                <!-- 项目 01：智能校园二手交易平台 -->
+                <article class="project-card">
+                    <div class="project-header project-header-market">
+                        <!-- 截图槽位：把 market.webp 放到 assets/projects/ 即自动覆盖渐变头 -->
+                        <img src="assets/projects/market.webp" onerror="this.remove()" alt="智能校园二手交易平台截图"
+                            class="project-shot" loading="lazy" decoding="async" width="640" height="360">
+                        <span class="project-id">[ 01 ]</span>
+                        <div class="project-visual-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg>
+                        </div>
+                        <h3 class="project-name">智能校园二手交易平台</h3>
+                        <p class="project-sub">AI Agent + RAG 智能导购</p>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-tags">
+                            <span>Spring Boot</span><span>FastAPI</span><span>OpenAI Responses API</span>
+                            <span>RAG</span><span>FAISS</span><span>MySQL</span><span>Redis</span>
+                        </div>
+                        <p class="project-description">
+                            独立完成核心功能设计：Spring Boot 业务后端 + FastAPI Agent 智能导购双服务。基于 Responses
+                            API 构建「规则 Guardrail → LLM Router（Structured Outputs）→ 混合查询路由」，自建
+                            <strong>200 条人工复核评测集</strong>，路由准确率 <strong>94.00% → 97.50%</strong>；RAG 链路覆盖
+                            359 文档 / 1,611 语义片段，端到端通过率 <strong>85.50% → 98.00%（196/200）</strong>。
+                        </p>
+                        <div class="project-buttons">
+                            <a href="https://market.pmsjl.com" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-filled btn-sm">在线体验 ↗</a>
+                            <a href="https://github.com/pmsjl/sharing-market" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-outline btn-sm">源码 ↗</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 项目 02：Verbal Memory 测试平台 -->
+                <article class="project-card">
+                    <div class="project-header project-header-verbal">
+                        <img src="assets/projects/verbal.webp" onerror="this.remove()" alt="Verbal Memory 测试平台截图"
+                            class="project-shot" loading="lazy" decoding="async" width="640" height="360">
+                        <span class="project-id">[ 02 ]</span>
+                        <div class="project-visual-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                        </div>
+                        <h3 class="project-name">Verbal Memory 测试平台</h3>
+                        <p class="project-sub">音乐条件 · 英语单词短时记忆实验</p>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-tags">
+                            <span>React</span><span>TypeScript</span><span>Spring Boot</span>
+                            <span>MySQL</span><span>Docker Compose</span>
+                        </div>
+                        <p class="project-description">
+                            面向音乐/无音乐组间对照实验的数据采集平台：React + TypeScript 实现「信息填写—记忆测试—结果提交—排行榜」完整流程，
+                            <strong>6,421 词</strong> NEW/SEEN 状态机保证两组被试条件一致；Spring Boot + MySQL 后端
+                            Docker Compose 双容器部署，前端 Cloudflare Pages 自动构建上线。
+                        </p>
+                        <div class="project-buttons">
+                            <a href="https://verbal.pmsjl.com" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-filled btn-sm">在线体验 ↗</a>
+                            <a href="https://github.com/pmsjl/verbal_test" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-outline btn-sm">源码 ↗</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 项目 03：飞机大战 Java Swing 游戏 -->
+                <article class="project-card">
+                    <div class="project-header project-header-aircraft">
+                        <img src="assets/projects/aircraft.webp" onerror="this.remove()" alt="飞机大战游戏截图"
+                            class="project-shot" loading="lazy" decoding="async" width="640" height="360">
+                        <span class="project-id">[ 03 ]</span>
+                        <div class="project-visual-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2 2 9l7 3-3 3-3-1.5L2 16.5l4 1.5 1.5 4 2-2L8.5 18l3-3 3 7 2.5-2.8z" />
+                            </svg>
+                        </div>
+                        <h3 class="project-name">飞机大战 Java Swing 游戏</h3>
+                        <p class="project-sub">纵版卷轴射击 · 设计模式实践</p>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-tags">
+                            <span>Java</span><span>Swing</span><span>设计模式</span>
+                        </div>
+                        <p class="project-description">
+                            纵向卷轴射击游戏：<strong>8 类差异化敌机</strong>、5 类功能道具、Boss 战与三档难度，
+                            排行榜对象序列化持久化。以模板方法、策略、观察者、工厂方法等设计模式抽象高频扩展点，
+                            降低新增敌机/道具/射击方式的接入成本。
+                        </p>
+                        <div class="project-buttons">
+                            <a href="https://github.com/pmsjl/AircraftGame" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-outline btn-sm">源码 ↗</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+         荣誉：Aryan Achievements 式卡片
+         ============================================== -->
+    <section id="honors" class="section honors-section reveal">
+        <div class="container">
+            <h2 class="section-title">荣誉</h2>
+
+            <div class="honors-grid">
+                <div class="honor-card">
+                    <div class="honor-icon">🏆</div>
+                    <div>
+                        <h4 class="honor-title">挑战杯国家级三等奖</h4>
+                        <p class="honor-desc">2025 年度「揭榜挂帅」擂台赛</p>
+                    </div>
+                </div>
+                <div class="honor-card">
+                    <div class="honor-icon">🎖️</div>
+                    <div>
+                        <h4 class="honor-title">全国大学生数学竞赛省级二等奖</h4>
+                        <p class="honor-desc">2025 年第十七届</p>
+                    </div>
+                </div>
+                <div class="honor-card">
+                    <div class="honor-icon">⭐</div>
+                    <div>
+                        <h4 class="honor-title">优秀学生、学业三等奖学金</h4>
+                        <p class="honor-desc">2024-2025 学年</p>
+                    </div>
+                </div>
+                <div class="honor-card">
+                    <div class="honor-icon">✨</div>
+                    <div>
+                        <h4 class="honor-title">五四表彰优秀团员</h4>
+                        <p class="honor-desc">2025-2026 年度</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 获奖证书画廊：点击放大 -->
+            <h3 class="category-title gallery-title">获奖证书</h3>
+            <div class="cert-gallery">
+                <div class="cert-item" role="button" tabindex="0" aria-label="放大查看挑战杯国家级三等奖证书"
+                    onclick="openCert('assets/certificates/tiaozhanbei.webp','挑战杯国家级三等奖')"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCert('assets/certificates/tiaozhanbei.webp','挑战杯国家级三等奖');}">
+                    <img src="assets/certificates/tiaozhanbei.webp" alt="挑战杯国家级三等奖证书" loading="lazy" decoding="async"
+                        width="933" height="634">
+                    <span class="cert-caption">挑战杯国家级三等奖</span>
+                </div>
+                <div class="cert-item" role="button" tabindex="0" aria-label="放大查看数学竞赛省级二等奖证书"
+                    onclick="openCert('assets/certificates/shuxuejingsai.webp','数学竞赛省级二等奖')"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCert('assets/certificates/shuxuejingsai.webp','数学竞赛省级二等奖');}">
+                    <img src="assets/certificates/shuxuejingsai.webp" alt="数学竞赛省级二等奖证书" loading="lazy" decoding="async"
+                        width="1400" height="1050">
+                    <span class="cert-caption">数学竞赛省级二等奖</span>
+                </div>
+                <div class="cert-item" role="button" tabindex="0" aria-label="放大查看学业三等奖学金证书"
+                    onclick="openCert('assets/certificates/jiangxuejin.webp','学业三等奖学金')"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCert('assets/certificates/jiangxuejin.webp','学业三等奖学金');}">
+                    <img src="assets/certificates/jiangxuejin.webp" alt="学业三等奖学金证书" loading="lazy" decoding="async"
+                        width="1279" height="1706">
+                    <span class="cert-caption">学业三等奖学金</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+         联系我：联系栏（弹窗复制）+ mailto 大按钮（方案 A）
+         ============================================== -->
+    <section id="contact" class="section contact-section reveal">
+        <div class="container">
+            <h2 class="section-title">联系我</h2>
+
+            <div class="contact-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"
+                    aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+                <span>时区 UTC+8 · 24 小时内回复</span>
+            </div>
+
+            <div class="contact-bar">
+                <button class="contact-segment" id="emailBtn" aria-label="邮箱">
+                    <svg viewBox="0 0 24 24" fill="#EA4335" class="brand-icon" aria-hidden="true">
+                        <path
+                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
+                    <span class="segment-label">邮箱</span>
+                </button>
+                <a href="https://github.com/pmsjl" target="_blank" rel="noopener noreferrer" class="contact-segment"
+                    aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="brand-icon brand-icon-github" aria-hidden="true">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                    <span class="segment-label">GitHub</span>
+                </a>
+            </div>
+
+            <a href="mailto:2024311001@stu.hit.edu.cn" class="btn btn-filled btn-contact">
+                <span class="btn-content">发邮件联系我</span>
+                <svg class="btn-icon-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z" />
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <nav class="footer-nav">
+                <a href="#about">关于我</a>
+                <a href="#projects">项目</a>
+                <a href="#honors">荣誉</a>
+                <a href="#contact">联系</a>
+            </nav>
+            <p class="copyright">© 2026 徐俊杰 · 哈尔滨工业大学（深圳）</p>
+            <a href="#hero" class="back-to-top" aria-label="回到顶部">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </a>
+        </div>
+    </footer>
+
+    <!-- 邮箱弹窗 -->
+    <div id="emailModal" class="modal-overlay" onclick="closeEmailModalOverlay(event)">
+        <div class="modal-box">
+            <div class="modal-icon modal-icon-email">
+                <svg viewBox="0 0 24 24" fill="#EA4335" width="38" height="38" aria-hidden="true">
+                    <path
+                        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                </svg>
+            </div>
+            <p class="modal-label">邮箱地址</p>
+            <p class="modal-value">2024311001@stu.hit.edu.cn</p>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-copy" onclick="copyEmail()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"
+                        aria-hidden="true">
+                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                    </svg>
+                    复制地址
+                </button>
+                <a href="mailto:2024311001@stu.hit.edu.cn" class="modal-btn modal-btn-primary"
+                    style="background:#EA4335;">
+                    <svg viewBox="0 0 24 24" fill="white" width="16" height="16" aria-hidden="true">
+                        <path
+                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
+                    发送邮件
+                </a>
+            </div>
+            <p class="modal-hint" id="copyEmailHint"></p>
+            <button class="modal-close" onclick="closeEmailModal()">关闭</button>
+        </div>
+    </div>
+
+    <!-- 证书灯箱 -->
+    <div id="certLightbox" class="modal-overlay lightbox" onclick="closeCertLightboxOverlay(event)">
+        <div class="lightbox-box" onclick="event.stopPropagation()">
+            <img id="certLightboxImg" alt="证书大图">
+            <p class="lightbox-caption" id="certLightboxCaption"></p>
+            <button class="modal-close lightbox-close" onclick="closeCertLightbox()">关闭</button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
