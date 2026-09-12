@@ -298,8 +298,9 @@
                         <p class="project-description">
                             独立完成核心功能设计：Spring Boot 业务后端 + FastAPI Agent 智能导购双服务。基于 Responses
                             API 构建「规则 Guardrail → LLM Router（Structured Outputs）→ 混合查询路由」，自建
-                            <strong>200 条人工复核评测集</strong>，检索链路 Recall@3 由 <strong>84.25% 提升至 89.76%</strong>；RAG 链路覆盖
-                            359 文档 / 1,611 语义片段，端到端通过率 <strong>83.00% → 97.00%（194/200）</strong>。
+                            <strong>200 条人工复核评测集（Golden v1.3）</strong>，在同一数据集与冻结索引下对比三个实现阶段：Router
+                            准确率 <strong>89% → 95%（190/200）</strong>、首位文档命中率 Recall@1 <strong>61.42% → 81.10%</strong>；RAG
+                            链路覆盖 359 文档 / 1,611 语义片段，端到端通过率 <strong>86.50% → 97.00%（194/200）</strong>。
                         </p>
                         <div class="project-buttons">
                             <a href="https://market.pmsjl.com" target="_blank" rel="noopener noreferrer"
