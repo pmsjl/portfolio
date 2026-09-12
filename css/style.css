@@ -859,7 +859,7 @@ button {
     width: 100%;
     aspect-ratio: auto;
     /* 550px ≈ 容器内容宽 1136px ÷ 截图 2560/1241，恰好完整显示不裁切 */
-    height: 550px;
+    height: 700px;
     min-height: 0;
 }
 
@@ -1591,7 +1591,7 @@ button {
 
     /* 移动端：旗舰图缩小 */
     .project-card:first-child .project-header {
-        height: 300px;
+        height: 380px;
     }
 
     .project-card:first-child .project-card-body {
