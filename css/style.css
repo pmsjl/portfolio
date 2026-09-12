@@ -979,8 +979,7 @@ button {
     flex: none;
     width: 100%;
     aspect-ratio: auto;
-    /* 550px ≈ 容器内容宽 1136px ÷ 截图 2560/1241，恰好完整显示不裁切 */
-    height: 900px;
+    height: 600px;
     min-height: 0;
 }
 
