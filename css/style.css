@@ -978,8 +978,9 @@ button {
 .project-card:first-child .project-header {
     flex: none;
     width: 100%;
-    aspect-ratio: auto;
-    height: 600px;
+    /* 锁死截图 market.webp 的原生比例 2560×1241：
+       高度随宽度自适应，任何窗口宽度下都完整显示、零裁切 */
+    aspect-ratio: 2560 / 1241;
     min-height: 0;
 }
 
@@ -1725,11 +1726,6 @@ button {
 
     .projects-grid {
         grid-template-columns: 1fr;
-    }
-
-    /* 移动端：旗舰图缩小 */
-    .project-card:first-child .project-header {
-        height: 380px;
     }
 
     .project-card:first-child .project-card-body {
