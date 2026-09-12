@@ -15,14 +15,17 @@
     --color-card: #FFFFFF;
     --color-card-hover-border: #2563EB;
     --color-accent: #2563EB;
-    --color-social: #0000EE;          /* Sarvesh 式高亮社交图标 */
-    --color-code-bg: #242434;         /* 代码窗深炭蓝紫 */
+    --color-social: #0000EE;
+    /* Sarvesh 式高亮社交图标 */
+    --color-code-bg: #242434;
+    /* 代码窗深炭蓝紫 */
     --color-code-header: #1E1E2C;
     --color-code-key: #6DBF94;
     --color-code-string: #EEDA9E;
     --color-code-number: #B89DF2;
     --color-code-punct: #8B8B9E;
-    --color-badge-bg: #16306E;        /* 校徽占位深蓝 */
+    --color-badge-bg: #16306E;
+    /* 校徽占位深蓝 */
 
     /* 项目渐变头 */
     --grad-market: linear-gradient(135deg, #2563EB, #06B6D4);
@@ -42,7 +45,8 @@
 [data-theme="dark"] {
     --color-bg: #12121F;
     --color-text-primary: #F0F0F0;
-    --color-text-secondary: #B4BCC9;   /* 提亮：保证对比度 > 4.5:1 */
+    --color-text-secondary: #B4BCC9;
+    /* 提亮：保证对比度 > 4.5:1 */
     --color-text-muted: #8A93A6;
     --color-border: #2A2A3A;
     --color-surface: #1A1A28;
@@ -80,7 +84,20 @@ body {
     transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-section, nav, footer, div, a, button, input, textarea, span, h1, h2, h3, h4, p {
+section,
+nav,
+footer,
+div,
+a,
+button,
+input,
+textarea,
+span,
+h1,
+h2,
+h3,
+h4,
+p {
     transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
         border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
         color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
@@ -199,7 +216,9 @@ button {
 }
 
 @keyframes blink {
-    50% { opacity: 0; }
+    50% {
+        opacity: 0;
+    }
 }
 
 .nav-links {
@@ -391,9 +410,17 @@ button {
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.nav-toggle[aria-expanded="true"] .toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav-toggle[aria-expanded="true"] .toggle-bar:nth-child(2) { opacity: 0; }
-.nav-toggle[aria-expanded="true"] .toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-toggle[aria-expanded="true"] .toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .toggle-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
 
 /* ==============================================
    Hero
@@ -436,7 +463,8 @@ button {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 20%;   /* 头像下移，露出完整头发 */
+    object-position: center 20%;
+    /* 头像下移，露出完整头发 */
 }
 
 .hero-greeting {
@@ -530,8 +558,15 @@ button {
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translate(-50%, 0); }
-    50% { transform: translate(-50%, 8px); }
+
+    0%,
+    100% {
+        transform: translate(-50%, 0);
+    }
+
+    50% {
+        transform: translate(-50%, 8px);
+    }
 }
 
 /* ==============================================
@@ -541,12 +576,29 @@ button {
     padding: 5.5rem 0;
 }
 
-.about-section { background: var(--color-surface); }
-.education-section { background: var(--color-bg); }
-.skills-section { background: var(--color-surface); }
-.projects-section { background: var(--color-bg); }
-.honors-section { background: var(--color-surface); }
-.contact-section { background: var(--color-bg); }
+.about-section {
+    background: var(--color-surface);
+}
+
+.education-section {
+    background: var(--color-bg);
+}
+
+.skills-section {
+    background: var(--color-surface);
+}
+
+.projects-section {
+    background: var(--color-bg);
+}
+
+.honors-section {
+    background: var(--color-surface);
+}
+
+.contact-section {
+    background: var(--color-bg);
+}
 
 .section-title {
     font-size: 2.7rem;
@@ -604,9 +656,17 @@ button {
     border-radius: 50%;
 }
 
-.card-dot.red { background: #D74746; }
-.card-dot.yellow { background: #E8B93C; }
-.card-dot.green { background: #3FBF6F; }
+.card-dot.red {
+    background: #D74746;
+}
+
+.card-dot.yellow {
+    background: #E8B93C;
+}
+
+.card-dot.green {
+    background: #3FBF6F;
+}
 
 .code-filename {
     position: absolute;
@@ -622,15 +682,35 @@ button {
     flex: 1;
 }
 
-.code-line { white-space: nowrap; }
+.code-line {
+    white-space: nowrap;
+}
 
-.code-indent { padding-left: 1.4rem; }
+.code-indent {
+    padding-left: 1.4rem;
+}
 
-.code-key { color: var(--color-code-key); }
-.code-string { color: var(--color-code-string); }
-.code-number { color: var(--color-code-number); }
-.code-bracket, .code-colon, .code-comma { color: var(--color-code-punct); }
-.code-green { color: var(--color-code-key); }
+.code-key {
+    color: var(--color-code-key);
+}
+
+.code-string {
+    color: var(--color-code-string);
+}
+
+.code-number {
+    color: var(--color-code-number);
+}
+
+.code-bracket,
+.code-colon,
+.code-comma {
+    color: var(--color-code-punct);
+}
+
+.code-green {
+    color: var(--color-code-key);
+}
 
 .cursor-blink {
     animation: blink 1s step-end infinite;
@@ -648,20 +728,61 @@ button {
     transform: none;
 }
 
-.about-code-window .code-line:nth-child(1) { transition-delay: 0.05s; }
-.about-code-window .code-line:nth-child(2) { transition-delay: 0.1s; }
-.about-code-window .code-line:nth-child(3) { transition-delay: 0.15s; }
-.about-code-window .code-line:nth-child(4) { transition-delay: 0.2s; }
-.about-code-window .code-line:nth-child(5) { transition-delay: 0.25s; }
-.about-code-window .code-line:nth-child(6) { transition-delay: 0.3s; }
-.about-code-window .code-line:nth-child(7) { transition-delay: 0.35s; }
-.about-code-window .code-line:nth-child(8) { transition-delay: 0.4s; }
-.about-code-window .code-line:nth-child(9) { transition-delay: 0.45s; }
-.about-code-window .code-line:nth-child(10) { transition-delay: 0.5s; }
-.about-code-window .code-line:nth-child(11) { transition-delay: 0.55s; }
-.about-code-window .code-line:nth-child(12) { transition-delay: 0.6s; }
-.about-code-window .code-line:nth-child(13) { transition-delay: 0.65s; }
-.about-code-window .code-line:nth-child(14) { transition-delay: 0.7s; }
+.about-code-window .code-line:nth-child(1) {
+    transition-delay: 0.05s;
+}
+
+.about-code-window .code-line:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+.about-code-window .code-line:nth-child(3) {
+    transition-delay: 0.15s;
+}
+
+.about-code-window .code-line:nth-child(4) {
+    transition-delay: 0.2s;
+}
+
+.about-code-window .code-line:nth-child(5) {
+    transition-delay: 0.25s;
+}
+
+.about-code-window .code-line:nth-child(6) {
+    transition-delay: 0.3s;
+}
+
+.about-code-window .code-line:nth-child(7) {
+    transition-delay: 0.35s;
+}
+
+.about-code-window .code-line:nth-child(8) {
+    transition-delay: 0.4s;
+}
+
+.about-code-window .code-line:nth-child(9) {
+    transition-delay: 0.45s;
+}
+
+.about-code-window .code-line:nth-child(10) {
+    transition-delay: 0.5s;
+}
+
+.about-code-window .code-line:nth-child(11) {
+    transition-delay: 0.55s;
+}
+
+.about-code-window .code-line:nth-child(12) {
+    transition-delay: 0.6s;
+}
+
+.about-code-window .code-line:nth-child(13) {
+    transition-delay: 0.65s;
+}
+
+.about-code-window .code-line:nth-child(14) {
+    transition-delay: 0.7s;
+}
 
 /* 自述大卡（Aryan 式：大内边距 + 白色加粗量化） */
 .about-text-card {
@@ -859,7 +980,7 @@ button {
     width: 100%;
     aspect-ratio: auto;
     /* 550px ≈ 容器内容宽 1136px ÷ 截图 2560/1241，恰好完整显示不裁切 */
-    height: 700px;
+    height: 900px;
     min-height: 0;
 }
 
@@ -901,10 +1022,20 @@ button {
     overflow: hidden;
 }
 
-.project-header-market { background: var(--grad-market); }
+.project-header-market {
+    background: var(--grad-market);
+}
+
 /* 副卡：小横图 16:9，避免大图放大模糊 */
-.project-header-verbal { background: var(--grad-verbal); aspect-ratio: 16 / 9; }
-.project-header-aircraft { background: var(--grad-aircraft); aspect-ratio: 16 / 9; }
+.project-header-verbal {
+    background: var(--grad-verbal);
+    aspect-ratio: 16 / 9;
+}
+
+.project-header-aircraft {
+    background: var(--grad-aircraft);
+    aspect-ratio: 16 / 9;
+}
 
 /* 截图槽位：文件存在时铺满渐变头（任意比例自适应），缺失时由 onerror 移除 */
 .project-shot {
@@ -1092,7 +1223,8 @@ button {
     font-size: 1.15rem;
     font-weight: 700;
     margin-bottom: 0.3rem;
-    text-wrap: balance;   /* 中文词组不断行（如"奖学金""时长"） */
+    text-wrap: balance;
+    /* 中文词组不断行（如"奖学金""时长"） */
 }
 
 .honor-desc {
@@ -1240,7 +1372,7 @@ button {
     letter-spacing: 0.06em;
 }
 
-.contact-segment + .contact-segment::before {
+.contact-segment+.contact-segment::before {
     content: '';
     position: absolute;
     left: 0;
@@ -1383,8 +1515,15 @@ button {
 }
 
 @keyframes modalIn {
-    from { opacity: 0; transform: translateY(16px) scale(0.97); }
-    to { opacity: 1; transform: none; }
+    from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 .modal-icon {
@@ -1621,7 +1760,9 @@ button {
         padding: 0 1.3rem;
     }
 
-    .btn-contact, .contact-bar, .contact-hint {
+    .btn-contact,
+    .contact-bar,
+    .contact-hint {
         max-width: 100%;
     }
 }
@@ -1650,6 +1791,7 @@ button {
    prefers-reduced-motion
    ============================================== */
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
