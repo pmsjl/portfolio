@@ -978,10 +978,67 @@ button {
 .project-card:first-child .project-header {
     flex: none;
     width: 100%;
-    /* 锁死截图 market.webp 的原生比例 2560×1241：
-       高度随宽度自适应，任何窗口宽度下都完整显示、零裁切 */
-    aspect-ratio: 2560 / 1241;
+    /* 高度交给截图自己决定（叠层网格：图片撑开高度，编号/标题浮在图上）。
+       不再锁死某个固定比例——换成任何长宽比的截图都完整显示、零裁切 */
+    display: grid;
+    grid-template-columns: 1fr;
+    aspect-ratio: auto;
+    padding: 0;
     min-height: 0;
+}
+
+/* 图片、编号、标题、副标题叠在同一格里 */
+.project-card:first-child .project-shot,
+.project-card:first-child .project-id,
+.project-card:first-child .project-name,
+.project-card:first-child .project-sub {
+    grid-area: 1 / 1;
+}
+
+/* 图片进入文档流并以原生比例铺满整行，由它决定卡片头高度 */
+.project-card:first-child .project-shot {
+    position: static;
+    width: 100%;
+    height: auto;
+    justify-self: stretch;
+    align-self: start;
+}
+
+.project-card:first-child .project-id {
+    position: static;
+    justify-self: end;
+    align-self: start;
+    margin: 1rem 1rem 0 0;
+}
+
+.project-card:first-child .project-name {
+    justify-self: start;
+    align-self: end;
+    margin: 0 1.3rem 2.85rem;
+}
+
+.project-card:first-child .project-sub {
+    justify-self: start;
+    align-self: end;
+    margin: 0 1.3rem 1.15rem;
+}
+
+/* 旗舰卡图更高：遮罩只压住左下角文字那一角，其余截图保持干净可读 */
+.project-card:first-child .project-header:has(.project-shot)::after {
+    background: radial-gradient(60% 34% at 0% 100%,
+            rgba(0, 0, 0, 0.86) 0,
+            rgba(0, 0, 0, 0.52) 36%,
+            rgba(0, 0, 0, 0.18) 68%,
+            transparent 100%);
+}
+
+/* 大图上文字放大一档，视觉分量才压得住；窄屏随宽度收回来 */
+.project-card:first-child .project-header:has(.project-shot) .project-name {
+    font-size: clamp(1.05rem, 0.75rem + 0.85vw, 1.4rem);
+}
+
+.project-card:first-child .project-header:has(.project-shot) .project-sub {
+    font-size: clamp(0.72rem, 0.6rem + 0.35vw, 0.85rem);
 }
 
 .project-card:first-child .project-card-body {
